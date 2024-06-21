@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/header-style.css}">
+</head>
+<body>
+<header class="header" th:insert="~{blocks/header :: header}"></header>
+
+<div class="container mt-5">
+    <div class="jumbotron">
+        <h1 class="display-4">Rocket League Item Exchange System</h1>
+        <hr class="my-4">
+        <h2>Introduction</h2>
+        <p class="lead">
+            The Rocket League Item Exchange System is an information system designed to facilitate the exchange of in-game items within the Rocket League community. It allows players to publish trade offers and browse existing offers, all while providing a convenient way to filter offers based on item types.
+        </p>
+        <h2>Target Audience</h2>
+        <p class="lead">
+            The primary audience for this system is Rocket League players who are interested in trading in-game items. Whether you're looking to swap out some of your items for new ones or searching for specific items to complete your collection, this system is designed to serve your needs.
+        </p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header-script.js}"></script>
+</body>
+</html>

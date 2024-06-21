@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Item List</title>
+    <!-- Add Bootstrap and custom styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/header-style.css}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+<!--            margin: 100px;-->
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .rlg-item__container {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+            background-color: #fff;
+        }
+
+        .rlg-item__container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .rlg-item__itemimage {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+            transition: opacity 0.3s;
+        }
+
+        .rlg-item__itemimage:hover {
+            opacity: 0.8;
+        }
+
+        .modal-content {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            background-color: #3498db;
+            color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #ddd;
+        }
+
+        .modal-body {
+            text-align: center;
+        }
+
+        h4.modal-title {
+            color: #3498db;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #495057;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="header" th:insert="~{blocks/header :: header}"></header>
+
+    <div class="row">
+        <div th:each="item : ${items}" class="col-md-4">
+            <div class="rlg-item__container is--import">
+                <!-- Button to trigger modal -->
+                <a href="#" class="rlg-items-item no-blur" data-toggle="modal" th:data-target="'#itemModal' + ${item.id}">
+                    <img class="rlg-item__itemimage"
+                         th:src="'https://raw.githubusercontent.com/enzanki-ars/rocket-league-item-images/enzanki-ars/Rocket%20League%20Item%20Images/'
+                                            + ${item.itemType} + '/' + ${item.itemLongLabel.replace(' ', '%20')} + '/Default.png'"
+                         alt="Item Image" loading="lazy">
+                    <h2 class="--new" th:href="@{'/item/'+${item.id}}"
+                        th:text="${item.itemLongLabel}"></h2>
+                </a>
+            </div>
+
+            <!-- Modal -->
+            <div th:id="'itemModal' + ${item.id}" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" th:text="${item.itemLongLabel}"></h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Display image from URL -->
+                            <img class="rlg-item__itemimage"
+                                 th:src="'https://raw.githubusercontent.com/enzanki-ars/rocket-league-item-images/enzanki-ars/Rocket%20League%20Item%20Images/'
+                                            + ${item.itemType} + '/' + ${item.itemLongLabel.replace(' ', '%20')} + '/Default.png'"
+                                 alt="Item Image" loading="lazy">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Bootstrap JS and Popper.js CDN links -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header-script.js}"></script>
+
+</body>
+</html>

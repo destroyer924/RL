@@ -1,0 +1,21 @@
+<!-- Navbar-->
+  <nav class="navbar navbar-expand-lg fixed-top py-3" th:fragment="header">
+    <div class="container"><a href="#" class="navbar-brand text-uppercase font-weight-bold">RL Market</a>
+      <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+
+      <div id="navbarSupportedContent" class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a href="/" class="nav-link text-uppercase font-weight-bold">Home <span class="sr-only">(current)</span></a></li>
+          <li class="nav-item"><a href="/trading" class="nav-link text-uppercase font-weight-bold">Trading</a></li>
+          <li class="nav-item"><a href="/items" class="nav-link text-uppercase font-weight-bold">Items</a></li>
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a th:href="@{/profile/{id}(id=${#authentication.principal.id})}" class="nav-link text-uppercase font-weight-bold">Profile</a>
+          </li>
+          <li class="nav-item"><a href="/login" class="nav-link text-uppercase font-weight-bold">Log In</a></li>
+<!--          <li class="nav-item"><a href="/register" class="nav-link text-uppercase font-weight-bold">Register</a></li>-->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+

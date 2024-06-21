@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/header-style.css}">
+</head>
+<body>
+<!--    <p th:text="${user.epicGames}"></p>-->
+
+<div class="container mt-5">
+    <header class="header" th:insert="~{blocks/header :: header}"></header>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <img src="https://e7.pngegg.com/pngimages/81/570/png-clipart-profile-logo-computer-icons-user-user-blue-heroes-thumbnail.png" class="card-img-top" alt="Profile Picture" loading="lazy">
+                <div class="card-body text-center">
+                    <h5 class="card-title" th:text="${user.epicGames}"></h5>
+                    <p class="card-text" th:text="${user.email}"></p>
+                    <p class="card-text" th:text="${user.role}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div th:each="t : ${userTrades}" class="col-md-4 mb-4">
+            <div class="card">
+                <!-- Header with Cross Icon for Deleting Trade -->
+                <div sec:authorize="isAuthenticated()" class="card-header" >
+                    <!-- Add a clickable element (e.g., a link) for deletion -->
+                    <a th:if="${#authentication.principal.username eq t.user.email}" th:href="@{'/delete/' + ${t.id}}" class="btn btn-danger btn-sm float-right">
+                        Delete
+                    </a>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <img th:src="'https://raw.githubusercontent.com/enzanki-ars/rocket-league-item-images/enzanki-ars/Rocket%20League%20Item%20Images/'
+                                            + ${t.giveItem.itemType} + '/' + ${t.giveItem.itemLongLabel.replace(' ', '%20')} + '/Default.png'"
+                         class="card-img-top" alt="Item Image" loading="lazy">
+                    <h5 class="card-title" th:text="${t.giveItem.itemLongLabel}"></h5>
+                </div>
+                <p class="card-text">Changes for</p>
+                <!-- Bottom Image and Card Body -->
+                <div class="card-body">
+                    <img th:src="'https://raw.githubusercontent.com/enzanki-ars/rocket-league-item-images/enzanki-ars/Rocket%20League%20Item%20Images/'
+                                            + ${t.getItem.itemType} + '/' + ${t.getItem.itemLongLabel.replace(' ', '%20')} + '/Default.png'"
+                         class="card-img-bottom" alt="Item Image" loading="lazy">
+                    <h5 class="card-title" th:text="${t.getItem.itemLongLabel}"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header-script.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+</body>
+</html>
